@@ -117,6 +117,7 @@ void LinkedQueue<T>::enqueue(const T& elem) {
         Node* add = new Node(elem);
         last = add;
         head = add;
+        this->length++;
         return;
     }
     Node* add = new Node(elem);
