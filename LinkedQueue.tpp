@@ -39,7 +39,7 @@ template <typename T>
 T LinkedQueue<T>::back() const {
     // TODO
     if(!last){
-        throw string("Error back: queue is empty");
+        throw string("back: error, queue is empty, cannot access the back");
     }
     return last->value;
 }
@@ -101,7 +101,7 @@ void LinkedQueue<T>::dequeue() {
 
     if(!head){
         cout << "exception being thrown" << endl;
-        throw string ("Error dequeue: Queue is empty");
+        throw string ("front: error, queue is empty, cannot access the front");
     }
 
     Node* ptr = head;
