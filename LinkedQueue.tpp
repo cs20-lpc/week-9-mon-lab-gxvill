@@ -48,7 +48,6 @@ template <typename T>
 void LinkedQueue<T>::clear() {
     // TODO
     if(!head){
-        cout << "queue is empty" << endl;
         return;
     }
     while(head){
@@ -71,7 +70,6 @@ void LinkedQueue<T>::copy(const LinkedQueue<T>& copyObj) {
 
 
     if(copyObj.head == nullptr){
-        cout << "exception being thrown" << endl;
         throw string ("Copy Error: copy object is empty!");
         return;
     }
@@ -82,7 +80,6 @@ void LinkedQueue<T>::copy(const LinkedQueue<T>& copyObj) {
 
     while(old != nullptr){
         ptr->next = new Node(old->value);
-        cout << "copied value: " << old->value << endl;
         ptr = ptr->next;
         old = old->next;
     }
@@ -91,7 +88,6 @@ void LinkedQueue<T>::copy(const LinkedQueue<T>& copyObj) {
 
     this->length = copyObj.length;
 
-    cout << "copy complete!" << endl;
 }
 
 template <typename T>
@@ -100,7 +96,6 @@ void LinkedQueue<T>::dequeue() {
     // remove element from the front of the list
 
     if(!head){
-        cout << "exception being thrown" << endl;
         throw string ("front: error, queue is empty, cannot access the front");
     }
 
@@ -130,7 +125,6 @@ void LinkedQueue<T>::enqueue(const T& elem) {
 
     this->length++;
 
-    cout << "enqueued to queue of value: " << elem << endl;
 }
 
 template <typename T>
