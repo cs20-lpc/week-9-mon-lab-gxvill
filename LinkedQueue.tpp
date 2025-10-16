@@ -1,6 +1,18 @@
+/*
+TODO list
+[x] contructor
+[x] back
+[x] clear
+[x] copy
+[x] dequeue
+[x] enqueue
+[x] front
+*/
+
 template <typename T>
 LinkedQueue<T>::LinkedQueue() {
-    // TODO
+    head = nullptr;
+    last = nullptr;
 }
 
 template <typename T>
@@ -25,31 +37,96 @@ LinkedQueue<T>::~LinkedQueue() {
 template <typename T>
 T LinkedQueue<T>::back() const {
     // TODO
+    return last->value;
 }
 
 template <typename T>
 void LinkedQueue<T>::clear() {
     // TODO
+    if(!head){
+        cout << "queue is empty" << endl;
+        return;
+    }
+    while(head){
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+    }
 }
 
 template <typename T>
 void LinkedQueue<T>::copy(const LinkedQueue<T>& copyObj) {
     // TODO
+    //iterate through the copy obj and create a new list 
+    // i think that we want to start from the tail of the list, and construct it backwards?
+    // this is actually more tricky than I thought it would be since we need to keep track of the prev or next pnode
+    // ill come back to this
+
+
+    if(copyObj.head == nullptr){
+        cout << "exception being thrown" << endl;
+        throw string ("Copy Error: copy object is empty!");
+        return;
+    }
+
+    head = new Node(copyObj.head->value);
+    Node* ptr = head;
+    Node* old = copyObj.head->next;
+
+    while(old != nullptr){
+        ptr->next = new Node(old->value);
+        cout << "copied value: " << old->value << endl;
+        ptr = ptr->next;
+        old = old->next;
+    }
+
+    last = ptr;
+
+    cout << "copy complete!" << endl;
+    
+
+
 }
 
 template <typename T>
 void LinkedQueue<T>::dequeue() {
     // TODO
+    // remove element from the front of the list
+
+    if(!head){
+        cout << "exception being thrown" << endl;
+        throw string ("Error dequeue: Queue is empty");
+    }
+
+    Node* ptr = head;
+    head = head->next;
+    delete ptr;
+    if(!head) last = nullptr;
+
 }
 
 template <typename T>
 void LinkedQueue<T>::enqueue(const T& elem) {
     // TODO
+
+    // add an element to the end of the list
+    if(!last){
+        Node* add = new Node(elem);
+        last = add;
+        head = add;
+        
+    }
+    Node* add = new Node(elem);
+    last->next = add;
+    last = add;
+
+    cout << "enqueued to queue of value: " << elem << endl;
 }
 
 template <typename T>
 T LinkedQueue<T>::front() const {
     // TODO
+    return head->value;
 }
 
 template <typename T>
