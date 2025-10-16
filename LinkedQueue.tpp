@@ -131,7 +131,7 @@ template <typename T>
 T LinkedQueue<T>::front() const {
     // TODO
     if(!head){
-        throw string("Error front: queue is empty");
+        throw string("front: error, queue is empty, cannot access the front");
     }
     return head->value;
 }
