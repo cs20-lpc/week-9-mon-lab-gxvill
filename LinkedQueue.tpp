@@ -13,6 +13,7 @@ template <typename T>
 LinkedQueue<T>::LinkedQueue() {
     head = nullptr;
     last = nullptr;
+    this->length = 0;
 }
 
 template <typename T>
@@ -37,6 +38,9 @@ LinkedQueue<T>::~LinkedQueue() {
 template <typename T>
 T LinkedQueue<T>::back() const {
     // TODO
+    if(!last){
+        throw string("Error back: queue is empty");
+    }
     return last->value;
 }
 
@@ -52,6 +56,9 @@ void LinkedQueue<T>::clear() {
         head = head->next;
         delete temp;
     }
+
+    last = nullptr;
+    this->length = 0;
 }
 
 template <typename T>
@@ -82,10 +89,9 @@ void LinkedQueue<T>::copy(const LinkedQueue<T>& copyObj) {
 
     last = ptr;
 
+    this->length = copyObj.length;
+
     cout << "copy complete!" << endl;
-    
-
-
 }
 
 template <typename T>
@@ -103,6 +109,8 @@ void LinkedQueue<T>::dequeue() {
     delete ptr;
     if(!head) last = nullptr;
 
+    this->length--;
+
 }
 
 template <typename T>
@@ -114,11 +122,13 @@ void LinkedQueue<T>::enqueue(const T& elem) {
         Node* add = new Node(elem);
         last = add;
         head = add;
-        
+        return;
     }
     Node* add = new Node(elem);
     last->next = add;
     last = add;
+
+    this->length++;
 
     cout << "enqueued to queue of value: " << elem << endl;
 }
@@ -126,6 +136,9 @@ void LinkedQueue<T>::enqueue(const T& elem) {
 template <typename T>
 T LinkedQueue<T>::front() const {
     // TODO
+    if(!head){
+        throw string("Error front: queue is empty");
+    }
     return head->value;
 }
 
